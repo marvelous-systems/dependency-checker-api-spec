@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.6.0"
+    "version": "0.7.0"
   },
   "servers": [
     {
@@ -132,6 +132,40 @@
         "responses": {
           "200": {
             "description": "Repository existed and was deleted or did not exist in the first place."
+          }
+        }
+      }
+    },
+    "/repository/{repositoryId}/plugin": {
+      "get": {
+        "summary": "Lists the enabled Plugins for a Repository.",
+        "operationId": "getPluginsForRepository",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repository exists and list of Plugins is returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plugin"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Repository doesn't exist."
           }
         }
       }
