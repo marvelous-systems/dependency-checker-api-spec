@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "servers": [
     {
@@ -39,12 +39,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "repositoryId": {
-                      "type": "integer"
-                    }
-                  }
+                  "$ref": "#/components/schemas/Repository"
                 }
               }
             },
