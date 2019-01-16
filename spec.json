@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.4.0"
+    "version": "0.5.0"
   },
   "servers": [
     {
@@ -144,6 +144,11 @@
     "schemas": {
       "Repository": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuidv4",
+            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+          },
           "url": {
             "type": "string",
             "example": "https://github.com/unwanted-consulting/DevelopmentBestPractices"
@@ -161,6 +166,11 @@
       },
       "Plugin": {
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuidv4",
+            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+          },
           "language": {
             "type": "string",
             "example": "JavaScript"
