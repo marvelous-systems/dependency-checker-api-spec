@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.5.0"
+    "version": "0.6.0"
   },
   "servers": [
     {
@@ -131,10 +131,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Repository existed and was deleted."
-          },
-          "404": {
-            "description": "Repository doesn't exist."
+            "description": "Repository existed and was deleted or did not exist in the first place."
           }
         }
       }
