@@ -2,12 +2,12 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.0.1"
+    "version": "0.1.0"
   },
   "servers": [
     {
       "url": "https://dependency-checker.test/api",
-      "description": "Local test server."
+      "description": "local test server"
     }
   ],
   "paths": {
@@ -17,7 +17,7 @@
         "responses": {
           "200": {
             "description": "",
-            "content":{
+            "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
@@ -27,6 +27,88 @@
                 }
               }
             }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new repository.",
+        "description": "If a repository with the given url already exists, a reference to it is returned.",
+        "responses": {
+          "200": {
+            "description": "Repository was successfully created or already existed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "repositoryId": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "links": {
+              "GetRepository": {
+                "operationId": "getRepository",
+                "parameters": {
+                  "repositoryId": "$response.body#/id"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/repository/{repositoryId}": {
+      "get": {
+        "summary": "Returns a specific Repository.",
+        "operationId": "getRepository",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repository exists and was returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Repository doesn't exist."
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the repository",
+        "operationId": "deleteRepository",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Repository existed and was deleted."
+          },
+          "404": {
+            "description": "Repository doesn't exist."
           }
         }
       }
@@ -40,7 +122,10 @@
             "type": "string",
             "example": "https://github.com/unwanted-consulting/DevelopmentBestPractices"
           }
-        }
+        },
+        "required": [
+          "url"
+        ]
       }
     }
   }
