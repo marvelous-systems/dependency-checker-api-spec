@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.10.0"
+    "version": "0.11.0"
   },
   "servers": [
     {
@@ -241,6 +241,37 @@
           },
           "404": {
             "description": "Repository doesn't exist."
+          }
+        }
+      }
+    },
+    "/repository/{repositoryId}/plugin/{pluginId}": {
+      "delete": {
+        "summary": "Disables a Plugin for a Repository.",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          },
+          {
+            "name": "pluginId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Plugin is now (and possibly was already) disabled for the Repository."
+          },
+          "404": {
+            "description": "The Repository doesn't exist."
           }
         }
       }
