@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.11.0"
+    "version": "0.11.1"
   },
   "servers": [
     {
@@ -118,7 +118,9 @@
             "name": "repositoryId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           }
@@ -147,7 +149,9 @@
             "name": "repositoryId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           }
@@ -168,7 +172,9 @@
             "name": "repositoryId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           }
@@ -200,7 +206,9 @@
             "name": "repositoryId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           }
@@ -253,7 +261,9 @@
             "name": "repositoryId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           },
@@ -261,7 +271,9 @@
             "name": "pluginId",
             "in": "path",
             "schema": {
-              "type": "integer"
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
             },
             "required": true
           }
