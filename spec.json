@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.9.0"
+    "version": "0.10.0"
   },
   "servers": [
     {
@@ -186,6 +186,58 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Repository doesn't exist."
+          }
+        }
+      },
+      "post": {
+        "summary": "Enables a Plugin for a Repository.",
+        "operationId": "enablePluginForRepository",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pluginId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The Plugin is now (and possibly was already) enabled for the Repository. Returns the full list of enabled Plugins for the Repository.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plugin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Plugin doesn't exist."
           },
           "404": {
             "description": "Repository doesn't exist."
