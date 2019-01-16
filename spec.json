@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.7.0"
+    "version": "0.8.0"
   },
   "servers": [
     {
@@ -66,7 +66,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Repository was successfully created or already existed.",
+            "description": "Repository already existed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Repository"
+                }
+              }
+            },
+            "links": {
+              "GetRepository": {
+                "operationId": "getRepository",
+                "parameters": {
+                  "repositoryId": "$response.body#/id"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Repository was created.",
             "content": {
               "application/json": {
                 "schema": {
