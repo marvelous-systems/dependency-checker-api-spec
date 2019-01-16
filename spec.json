@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.2.0"
+    "version": "0.3.0"
   },
   "servers": [
     {
@@ -33,6 +33,17 @@
       "post": {
         "summary": "Creates a new repository.",
         "description": "If a repository with the given url already exists, a reference to it is returned.",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "https://github.com/unwanted-consulting/DevelopmentBestPractices"
+            },
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Repository was successfully created or already existed.",
