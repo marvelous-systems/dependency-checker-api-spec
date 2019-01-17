@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.12.1"
+    "version": "0.13.0"
   },
   "servers": [
     {
@@ -290,6 +290,92 @@
           }
         }
       }
+    },
+    "/repository/{repositoryId}/manifest": {
+      "get": {
+        "summary": "Lists all manifests found in the Repository on the latest check.",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all manifests currently in the repository.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Manifest"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Repository doesn't exist."
+          }
+        }
+      }
+    },
+    "/repository/{repositoryId}/report": {
+      "get": {
+        "summary": "The latest RepositoryReport for the Repository and a list of links to older ones.",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The latest report and a list of links to older ones.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "latestReport": {
+                      "$ref": "#/components/schemas/RepositoryReport"
+                    },
+                    "olderReports": {
+                      "description": "Older reports sorted by creation date descending.",
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuidv4",
+                            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -338,6 +424,131 @@
           "id",
           "language",
           "packageManager"
+        ]
+      },
+      "Manifest": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuidv4",
+            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+          },
+          "path": {
+            "type": "string",
+            "format": "path",
+            "example": "/package.json"
+          },
+          "foundBy": {
+            "$ref": "#/components/schemas/Plugin"
+          },
+          "latestReport": {
+            "$ref": "#/components/schemas/ManifestReport"
+          },
+          "olderReports": {
+            "description": "Older reports sorted by creation date descending.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuidv4",
+                  "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "foundBy",
+          "latestReport"
+        ]
+      },
+      "ManifestReport": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuidv4",
+            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+          },
+          "generatedOn": {
+            "description": "When the report has been generated.",
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "packages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "current": {
+                  "$ref": "#/components/schemas/Package"
+                },
+                "semverUpdate": {
+                  "$ref": "#/components/schemas/Package"
+                },
+                "fullUpdate": {
+                  "$ref": "#/components/schemas/Package"
+                }
+              },
+              "required": [
+                "current"
+              ]
+            }
+          }
+        },
+        "required": [
+          "id",
+          "generatedOn",
+          "packages"
+        ]
+      },
+      "RepositoryReport": {
+        "properties": {
+          "generatedOn": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "manifests": {
+            "description": "The Manifests here will only contain their latest reports.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Manifest"
+            }
+          }
+        },
+        "required": [
+          "generatedOn",
+          "manifest"
+        ]
+      },
+      "Package": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "@babel/core"
+          },
+          "version": {
+            "type": "string",
+            "example": "^7.2.2",
+            "description": "This string can have any format, since there are package managers supporting anything as version strings."
+          },
+          "origin": {
+            "type": "string",
+            "example": "",
+            "description": "This directs to un-official repositories for packages and is left out for packages installed form the default repository for a Plugin."
+          }
+        },
+        "required": [
+          "name",
+          "version"
         ]
       }
     }
