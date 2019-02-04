@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.16.0"
+    "version": "0.17.0"
   },
   "servers": [
     {
@@ -322,6 +322,26 @@
           },
           "404": {
             "description": "The Repository doesn't exist."
+          }
+        }
+      }
+    },
+    "/manifest": {
+      "get": {
+        "summary": "Lists all accessible manifests in the system.",
+        "responses": {
+          "200": {
+            "description": "A list of all accessible manifests in the system.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Manifest"
+                  }
+                }
+              }
+            }
           }
         }
       }
