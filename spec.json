@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.21.0"
+    "version": "0.22.0"
   },
   "servers": [
     {
@@ -592,6 +592,7 @@
         ]
       },
       "RepositoryReport": {
+        "description": "A RepositoryReport is an ephemeral collection of the latest reports of all Manifests in a Repository. As such it has no fix uuid and is constantly changing.",
         "properties": {
           "generatedOn": {
             "type": "string",
@@ -606,8 +607,8 @@
               "properties": {
                 "manifest": {
                   "type": "string",
-                  "format": "url",
-                  "description": "Url to the manifest's endpoint."
+                  "format": "uuidv4",,
+                  "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
                 },
                 "report": {
                   "$ref": "#/components/schemas/ManifestReport"
