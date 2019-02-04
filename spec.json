@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.13.0"
+    "version": "0.14.0"
   },
   "servers": [
     {
@@ -322,6 +322,48 @@
           },
           "404": {
             "description": "The Repository doesn't exist."
+          }
+        }
+      }
+    },
+    "/repository/{repositoryId}/manifest/{manifestId}": {
+      "get": {
+        "summary": "A manifest.",
+        "parameters": [
+          {
+            "name": "repositoryId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          },
+          {
+            "name": "manifestId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A manifest.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Manifest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Manifest or Repository doesn't exist."
           }
         }
       }
