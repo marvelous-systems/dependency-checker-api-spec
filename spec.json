@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.19.1"
+    "version": "0.20.0"
   },
   "servers": [
     {
@@ -445,9 +445,9 @@
         }
       }
     },
-    "/repository/{repositoryId}/report": {
+    "/repository/{repositoryId}/report/latest": {
       "get": {
-        "summary": "The latest RepositoryReport for the Repository and a list of links to older ones.",
+        "summary": "The latest RepositoryReport for the Repository.",
         "parameters": [
           {
             "name": "repositoryId",
@@ -462,33 +462,11 @@
         ],
         "responses": {
           "200": {
-            "description": "The latest report and a list of links to older ones.",
+            "description": "A report.",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "latestReport": {
-                      "$ref": "#/components/schemas/RepositoryReport"
-                    },
-                    "olderReports": {
-                      "description": "Older reports sorted by creation date descending.",
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuidv4",
-                            "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
-                          }
-                        },
-                        "required": [
-                          "id"
-                        ]
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/RepositoryReport"
                 }
               }
             }
