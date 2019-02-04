@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.14.0"
+    "version": "0.15.0"
   },
   "servers": [
     {
@@ -484,24 +484,9 @@
             "$ref": "#/components/schemas/Plugin"
           },
           "latestReport": {
-            "$ref": "#/components/schemas/ManifestReport"
-          },
-          "olderReports": {
-            "description": "Older reports sorted by creation date descending.",
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "format": "uuidv4",
-                  "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
-                }
-              },
-              "required": [
-                "id"
-              ]
-            }
+            "type": "string",
+            "format": "url",
+            "example": "https://dependency-checker.test/api/repository/1/manifest/2/report/latest"
           }
         },
         "required": [
