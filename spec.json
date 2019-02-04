@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.20.0"
+    "version": "0.21.0"
   },
   "servers": [
     {
@@ -598,11 +598,21 @@
             "format": "date-time",
             "example": "2017-07-21T17:32:28Z"
           },
-          "manifests": {
-            "description": "The Manifests here will only contain their latest reports.",
+          "manifestReports": {
+            "description": "A report for each manifest in the Repository.",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Manifest"
+              "type": "object",
+              "properties": {
+                "manifest": {
+                  "type": "string",
+                  "format": "url",
+                  "description": "Url to the manifest's endpoint."
+                },
+                "report": {
+                  "$ref": "#/components/schemas/ManifestReport"
+                }
+              }
             }
           }
         },
