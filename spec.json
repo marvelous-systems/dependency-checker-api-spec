@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.17.0"
+    "version": "0.18.0"
   },
   "servers": [
     {
@@ -364,6 +364,38 @@
         "responses": {
           "200": {
             "description": "A manifest.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Manifest"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The Manifest doesn't exist."
+          }
+        }
+      }
+    },
+    "/manifest/{manifestId}/report": {
+      "get": {
+        "summary": "A list of reports for a manifest.",
+        "parameters": [
+          {
+            "name": "manifestId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of reports.",
             "content": {
               "application/json": {
                 "schema": {
