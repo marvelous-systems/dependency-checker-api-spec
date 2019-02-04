@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dependency Checker",
-    "version": "0.22.0"
+    "version": "0.23.0"
   },
   "servers": [
     {
@@ -441,6 +441,38 @@
           },
           "404": {
             "description": "The Manifest doesn't exist or has no report yet."
+          }
+        }
+      }
+    },
+    "/report/{reportId}": {
+      "get": {
+        "summary": "A singular ManifestReport.",
+        "parameters": [
+          {
+            "name": "reportId",
+            "in": "path",
+            "schema": {
+              "type": "string",
+              "format": "uuidv4",
+              "example": "8f6e2a24-028e-45ad-a14c-6e80356168b5"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A ManifestReport.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManifestReport"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The ManifestReport doesn't exist."
           }
         }
       }
